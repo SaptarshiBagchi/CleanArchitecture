@@ -4,6 +4,9 @@
  */
 
 /** @type {import('jest').Config} */
+
+const { defaults: tsjPreset } = require('ts-jest/presets')
+
 const config = {
   // All imported modules in your tests should be mocked automatically
   // automock: false,
@@ -21,10 +24,10 @@ const config = {
   // collectCoverage: false,
 
   // An array of glob patterns indicating a set of files for which coverage information should be collected
-  collectCoverageFrom: ['<rootDir>/src/**/*.ts', '<rootDir>/src/main/**/*.ts'],
+  collectCoverageFrom: ['<rootDir>/src/**/*.ts', '!<rootDir>/src/main/**/*.ts'],
 
   // The directory where Jest should output its coverage files
-  // coverageDirectory: undefined,
+  coverageDirectory: 'coverage',
 
   // An array of regexp pattern strings used to skip coverage collection
   // coveragePathIgnorePatterns: [
@@ -89,7 +92,13 @@ const config = {
   // ],
 
   // A map from regular expressions to module names or to arrays of module names that allow to stub out resources with a single module
-  // moduleNameMapper: {},
+  moduleNameMapper: {
+    '@domain/(.*)': '<rootDir>/src/domain/$1',
+    '@infrastructure/(.*)': '<rootDir>/src/infrastructure/$1',
+    '@application/(.*)': '<rootDir>/src/application/$1',
+    '@main/(.*)': '<rootDir>/src/main/$1',
+    '@test/(.*)': '<rootDir>/test/$1',
+  },
 
   // An array of regexp pattern strings, matched against all module paths before considered 'visible' to the module loader
   // modulePathIgnorePatterns: [],
@@ -125,9 +134,7 @@ const config = {
   // rootDir: undefined,
 
   // A list of paths to directories that Jest should use to search for files in
-  // roots: [
-  //   "<rootDir>"
-  // ],
+  roots: ['<rootDir>/test/'],
 
   // Allows you to use a custom runner instead of Jest's default test runner
   // runner: "jest-runner",
@@ -174,7 +181,9 @@ const config = {
   // testRunner: "jest-circus/runner",
 
   // A map from regular expressions to paths to transformers
-  // transform: undefined,
+  transform: {
+    ...tsjPreset.transform,
+  },
 
   // An array of regexp pattern strings that are matched against all source file paths, matched files will skip transformation
   // transformIgnorePatterns: [
