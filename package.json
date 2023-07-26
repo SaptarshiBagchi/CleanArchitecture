@@ -30,7 +30,8 @@
     "build:watch": "npm run build -- --watch",
     "start": "node dist/main/server.js",
     "dev": "nodemon -L --watch ./dist ./dist/main/server.js",
-    "start:dev": "concurrently --kill-others-on-fail \"npm run build:watch\" \"npm run dev\"",
+    "up": "concurrently --kill-others-on-fail \"npm run build:watch\" \"docker compose up\"",
+    "down": "docker compose down",
     "test": "jest --passWithNoTests --runInBand --no-cache",
     "test:stage": "npm run test -- --findRelatedTests",
     "test:ci": "npm run test -- --coverage",
@@ -44,5 +45,8 @@
     "@infrastructure": "dist/infrastructure",
     "@application": "dist/application",
     "@main": "dist/main"
+  },
+  "engines": {
+    "node": "18.x"
   }
 }
