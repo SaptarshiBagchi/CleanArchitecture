@@ -1,9 +1,13 @@
-import { Router } from 'express'
+import { Router, type RequestHandler } from 'express'
+import userController from './controller/user.controller'
 
 const setupRoute = (): Router => {
   const router = Router()
-  router.route('/').get().post()
-  router.route('/:id').get().patch()
+  router
+    .route('/')
+    .get(userController.find as RequestHandler)
+    .post()
+  router.route('/:id').get().patch().delete()
   return router
 }
 
