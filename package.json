@@ -46,7 +46,8 @@
     "@domain": "dist/domain",
     "@infrastructure": "dist/infrastructure",
     "@application": "dist/application",
-    "@main": "dist/main"
+    "@main": "dist/main",
+    "@modules": "dist/modules"
   },
   "engines": {
     "node": "18.x"

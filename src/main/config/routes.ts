@@ -1,9 +1,9 @@
-import { type Express, type Request, type Response, Router } from 'express'
+import { type Express, type Request, type Response } from 'express'
+import userRouter from '@application/modules/user/routes'
 
 export default (app: Express): void => {
-  const router = Router()
   app.get('/health', (_: Request, res: Response) => {
     return res.status(200).json({ message: 'ok' })
   })
-  app.use(router)
+  app.use(userRouter.name, userRouter.router)
 }

@@ -98,6 +98,7 @@ const config = {
     '@application/(.*)': '<rootDir>/src/application/$1',
     '@main/(.*)': '<rootDir>/src/main/$1',
     '@test/(.*)': '<rootDir>/test/$1',
+    '@modules/(.*)': '<rootDir>/src/modules/$1'
   },
 
   // An array of regexp pattern strings, matched against all module paths before considered 'visible' to the module loader
@@ -182,8 +183,8 @@ const config = {
 
   // A map from regular expressions to paths to transformers
   transform: {
-    ...tsjPreset.transform,
-  },
+    ...tsjPreset.transform
+  }
 
   // An array of regexp pattern strings that are matched against all source file paths, matched files will skip transformation
   // transformIgnorePatterns: [
