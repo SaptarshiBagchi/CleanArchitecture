@@ -1,4 +1,4 @@
-import { MongoClient, type Collection } from 'mongodb'
+import { MongoClient, type Collection, type Document } from 'mongodb'
 
 class DbConnection {
   private url?: string
@@ -6,9 +6,13 @@ class DbConnection {
 
   async connect(url: string): Promise<void> {
     if (!url) throw new Error('URL not found for DB')
-    this.url = url
-    this.client = new MongoClient(this.url)
-    await this.client.connect()
+    try {
+      this.url = url
+      this.client = new MongoClient(this.url)
+      await this.client.connect()
+    } catch (err) {
+      throw new Error((err as Error).message)
+    }
   }
 
   async disconnect(): Promise<void> {
@@ -16,12 +20,12 @@ class DbConnection {
     this.client = undefined
   }
 
-  async getCollection(name: string): Promise<Collection> {
+  getCollection<T extends Document>(name: string): Collection<T> {
     const db = this.client?.db()
     if (!db) {
       throw new Error('Mongodb client is not connected')
     }
-    return db.collection(name)
+    return db.collection<T>(name)
   }
 }
 
