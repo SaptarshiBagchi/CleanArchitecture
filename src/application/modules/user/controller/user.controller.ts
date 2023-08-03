@@ -5,8 +5,6 @@ interface IUserController {
 }
 
 class UserController implements IUserController {
-  constructor() {}
-
   async find(req: Request, res: Response, next: NextFunction): Promise<Response | undefined> {
     try {
       const result = req.query
