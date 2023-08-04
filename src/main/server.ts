@@ -3,7 +3,7 @@ import DbConnection from '@infrastructure/db/mongodb/helpers/db-connection'
 import env from '@main/config/env'
 import setupApp from '@main/config/app'
 
-DbConnection.connect(env.MONGO_URL)
+DbConnection.connect()
   .then(() => {
     console.log('DB Connected')
     const app = setupApp()

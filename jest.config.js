@@ -184,7 +184,7 @@ const config = {
   // A map from regular expressions to paths to transformers
   transform: {
     ...tsjPreset.transform
-  }
+  },
 
   // An array of regexp pattern strings that are matched against all source file paths, matched files will skip transformation
   // transformIgnorePatterns: [
@@ -203,6 +203,7 @@ const config = {
 
   // Whether to use watchman for file crawling
   // watchman: true,
+  testTimeout: 5000
 }
 
 module.exports = config

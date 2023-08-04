@@ -8,7 +8,7 @@ export interface IUserRepository {
   find: (filterQuery: Filter<Document>) => Promise<UserDocument[]>
 }
 
-class UserRepository implements IUserRepository {
+export class UserRepository implements IUserRepository {
   collection: Collection<UserDocument>
   constructor() {
     this.collection = dbConnection.getCollection<UserDocument>('users')
